@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Sky Event - J Store</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+    /* Custom scrollbar for chat start buttons focus */
+    .btn-start:focus {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+
+    /* Custom styles for mobile menu transition */
+    .mobile-menu {
+      transition: max-height 0.3s ease-out;
+      overflow: hidden;
+      max-height: 0; /* Hidden by default */
+    }
+    .mobile-menu.open {
+      max-height: 500px; /* Adjust as needed to fit content */
+      transition: max-height 0.5s ease-in;
+    }
+
+    /* Base styles for dark mode (default) */
+    body {
+      background-color: #1a202c; /* bg-gray-900 */
+      color: #d1d5db; /* text-gray-300 */
+    }
+
+    /* Removed all light mode specific styles */
+  </style>
+    </head>
+    <body class="bg-gray-900 text-gray-300 font-sans min-h-screen p-8">
+
+        <!-- Header Section -->
+        <header
+            class="bg-gray-800 text-gray-100 p-4 shadow-lg sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <!-- Logo/Site Title -->
+                <a href="index.html"
+                    class="flex items-center gap-2 text-2xl font-bold text-yellow-400 hover:text-yellow-300 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2" aria-hidden="true"
+                        aria-label="Sparkles icon" role="img">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M5 13l4 4L19 7m-7-6v4m0 0v4m0-4h4m-4 0H8" />
+                    </svg>
+                    J Store
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-6">
+                    <a href="index.html"
+                        class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Home</a>
+                    <a href="#"
+                        class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Sky:
+                        Children of The Light</a>
+                    <a href="roblox.html"
+                        class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Roblox</a>
+                    <a href="#"
+                        class="text-gray-300 hover:text-white transition-colors duration-200 font-medium">Contact</a>
+                    <!-- Removed Theme Toggle Button for Desktop -->
+                </nav>
+
+                <!-- Mobile Menu Button (Burger Icon) -->
+                <div class="lg:hidden flex items-center gap-2">
+                    <!-- Removed Theme Toggle Button for Mobile (inline) -->
+
+                    <button id="mobile-menu-button"
+                        class="text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-yellow-400 rounded-md p-2">
+                        <svg id="menu-icon-open" class="h-6 w-6" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="menu-icon-close" class="h-6 w-6 hidden"
+                            fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation (Hidden by default) -->
+            <nav id="mobile-menu"
+                class="mobile-menu lg:hidden bg-gray-700 mt-4 rounded-md">
+                <ul class="flex flex-col space-y-3 p-4">
+                    <li><a href="index.html"
+                            class="block text-gray-300 hover:text-white transition-colors duration-200 font-medium py-2">Home</a></li>
+                    <li><a href="#"
+                            class="block text-gray-300 hover:text-white transition-colors duration-200 font-medium py-2">Sky:
+                        Children of The Light</a></li>
+                    <li><a href="roblox.html"
+                            class="block text-gray-300 hover:text-white transition-colors duration-200 font-medium py-2">Roblox
+                            Us</a></li>
+                    <li><a href="#"
+                            class="block text-gray-300 hover:text-white transition-colors duration-200 font-medium py-2">Contact</a></li>
+                    <!-- Removed Theme Toggle Button for Mobile (inside menu) -->
+                </ul>
+            </nav>
+        </header>
+
+        <main class="max-w-7xl mx-auto mt-8">
+            <!-- Existing content from your skyevent.html -->
+            <header class="text-center mb-12">
+                <h1
+                    class="text-4xl font-semibold text-gray-100 mb-3 flex justify-center items-center gap-2">
+                    <span>SKY: CHILDREN OF THE LIGHT</span>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-yellow-400 animate-pulse"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        stroke-width="2" aria-hidden="true"
+                        aria-label="Sparkles icon" role="img">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M5 13l4 4L19 7m-7-6v4m0 0v4m0-4h4m-4 0H8" />
+                    </svg>
+                </h1>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+                    Kumpulan macam-macam event yang terdapat di game sky.<br>
+                    klik lihat iap untuk melihat list IAP beserta harganya.
+                </p>
+                <div
+                    class="mt-6 flex justify-center space-x-8 text-gray-500 text-sm select-none">
+                    <div class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                            fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2"
+                            aria-hidden="true" role="img"><path
+                                stroke-linecap="round" stroke-linejoin="round"
+                                d="M17 20h5v-2a4 4 0 0 0-3-3.87m1-6.13a4 4 0 1 0-6.44 3.05M12 12v9m0-9h-1" /></svg>
+                        <span>Event</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                            fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2"
+                            aria-hidden="true" role="img"><path
+                                stroke-linecap="round" stroke-linejoin="round"
+                                d="M17 8h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2m-4-4h6" /></svg>
+                        <span>Limited</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
+                            fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2"
+                            aria-hidden="true" role="img"><path
+                                stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 8v4l3 3" /></svg>
+                        <span>Season</span>
+                    </div>
+                </div>
+            </header>
+
+            <section aria-labelledby="featured-characters-heading"
+                class="space-y-4">
+                <h2 id="featured-characters-heading"
+                    class="text-gray-200 font-semibold mb-3">Event-event
+                    Sky</h2>
+                <p class="text-sm text-gray-400 mb-6">Pilih sesusai yang
+                    diinginkan.</p>
+
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                    role="list">
+
+                    <!-- Sunlight -->
+                    <article
+                        class="bg-gray-800 rounded-lg border border-gray-700 p-5 flex flex-col"
+                        role="listitem" tabindex="0"
+                        aria-label="Sage Mentor character card">
+                        <div class="flex items-center mb-4">
+                            <img src="sunlight/Surfboard.png"
+                                alt="Portrait of a wise elder with white hair and gentle expression in soft lighting"
+                                class="w-12 h-12 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0"
+                                onerror="this.style.display='none'" />
+                            <div>
+                                <h3 class="text-white font-semibold">Days of
+                                    Sunlight</h3>
+                                <p
+                                    class="text-xs text-yellow-400 font-semibold mt-0.5">Event</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-300 flex-grow mb-4">Days of
+                            Sunlight merupakan acara tahunan yang merayakan
+                            kehangatan musim panas, dengan mengajak para pemain
+                            untuk bersantai di bawah sinar matahari.</p>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <span
+                                class="text-xs bg-yellow-700 text-yellow-300 rounded px-2 py-0.5">01</span>
+                            <span
+                                class="text-xs bg-yellow-700 text-yellow-300 rounded px-2 py-0.5">September</span>
+                            <span
+                                class="text-xs bg-yellow-700 text-yellow-300 rounded px-2 py-0.5">2025</span>
+                        </div>
+                        <a href="sunlightDays.html"
+                            class="btn-start w-full bg-gray-200 text-gray-900 rounded px-3 py-2 hover:bg-gray-300 flex items-center justify-center gap-2"
+                            aria-label="Start chat with Sage Mentor">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-4 w-4 text-gray-700" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true"
+                                focusable="false">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M10 14l2-2m0 0l2-2m-2 2v6m4-6h2a 2 2 0 0 1 2 2v4" />
+                            </svg>
+                            Lihat IAP
+                        </a>
+
+                    </article>
+
+                    <!-- Moonlight -->
+                    <article
+                        class="bg-gray-800 rounded-lg border border-gray-700 p-5 flex flex-col"
+                        role="listitem" tabindex="0"
+                        aria-label="Cheerful Friend character card">
+                        <div class="flex items-center mb-4">
+                            <img src="img/moonlight.png"
+                                alt="Smiling young woman wearing headphones and casual clothes with bright background"
+                                class="w-12 h-12 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0"
+                                onerror="this.style.display='none'" />
+                            <div>
+                                <h3 class="text-white font-semibold">Days of
+                                    Moonlight</h3>
+                                <p
+                                    class="text-xs text-blue-400 font-semibold mt-0.5">Event</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-300 flex-grow mb-4">Days of
+                            Moonlight memulai debutnya, mengundang pemain untuk
+                            menikmati keindahan bulan purnama dan cahaya lentera
+                            yang bersinar!</p>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <span
+                                class="text-xs bg-blue-700 text-blue-300 rounded px-2 py-0.5">29</span>
+                            <span
+                                class="text-xs bg-blue-700 text-blue-300 rounded px-2 py-0.5">September</span>
+                            <span
+                                class="text-xs bg-blue-700 text-blue-300 rounded px-2 py-0.5">2025</span>
+                        </div>
+                        <a href="moonlightDays.html"
+                            class="btn-start w-full bg-gray-200 text-gray-900 rounded px-3 py-2 hover:bg-gray-300 flex items-center justify-center gap-2"
+                            aria-label="Start chat with Sage Mentor">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-4 w-4 text-gray-700" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true"
+                                focusable="false">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M10 14l2-2m0 0l2-2m-2 2v6m4-6h2a 2 2 0 0 1 2 2v4" />
+                            </svg>
+                            Lihat IAP
+                        </a>
+                    </article>
+
+                    <!-- Season Pass -->
+                    <article
+                        class="bg-gray-800 rounded-lg border border-gray-700 p-5 flex flex-col"
+                        role="listitem" tabindex="0"
+                        aria-label="Creative Writer character card">
+                        <div class="flex items-center mb-4">
+                            <img
+                                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/161cb672-9c4c-4220-991e-d5aaef288350.png"
+                                alt="Artistic person with glasses writing a story in a notebook surrounded by books and candles"
+                                class="w-12 h-12 rounded-full border-2 border-gray-600 mr-4 flex-shrink-0"
+                                onerror="this.style.display='none'" />
+                            <div>
+                                <h3 class="text-white font-semibold">Season
+                                    Pass</h3>
+                                <p
+                                    class="text-xs text-red-400 font-semibold mt-0.5">Limited</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-300 flex-grow mb-4">Pemegang Season Pass akan mendapatkan liontin musiman khusus dan memiliki kesempatan untuk mengumpulkan item kosmetik unik.</p>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <span
+                                class="text-xs bg-red-700 text-red-300 rounded px-2 py-0.5">21</span>
+                            <span
+                                class="text-xs bg-red-700 text-red-300 rounded px-2 py-0.5">Juli</span>
+                            <span
+                                class="text-xs bg-red-700 text-red-300 rounded px-2 py-0.5">2025</span>
+                        </div>
+                        <a href="seasonPass.html"
+                            class="btn-start w-full bg-gray-200 text-gray-900 rounded px-3 py-2 hover:bg-gray-300 flex items-center justify-center gap-2"
+                            aria-label="Start chat with Sage Mentor">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-4 w-4 text-gray-700" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true"
+                                focusable="false">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M10 14l2-2m0 0l2-2m-2 2v6m4-6h2a 2 2 0 0 1 2 2v4" />
+                            </svg>
+                            Lihat IAP
+                        </a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIconOpen = document.getElementById('menu-icon-open');
+      const menuIconClose = document.getElementById('menu-icon-close');
+
+      // Removed all theme toggle elements and logic
+      // The page will now always be in dark mode by default CSS.
+
+      // Mobile menu toggle logic (from previous implementation)
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('open');
+        menuIconOpen.classList.toggle('hidden');
+        menuIconClose.classList.toggle('hidden');
+      });
+
+      // Close mobile menu when a link is clicked (optional, but good UX)
+      const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+      mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('open');
+          menuIconOpen.classList.remove('hidden');
+          menuIconClose.classList.add('hidden');
+        });
+      });
+    });
+  </script>
+    </body>
+</html>

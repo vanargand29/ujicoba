@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Genshin Impact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    /* Custom Scrollbar for progress bars */
+    ::-webkit-scrollbar {
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #4ade80;
+      border-radius: 3px;
+    }
+    /* Card dark bg blending */
+    .card-bg {
+      background-color: #1e293b; /* Diubah agar sama dengan warna header (slate-800) */
+      box-shadow: 0 4px 14px rgb(15 23 42 / 0.7);
+      border-radius: 0.5rem;
+    }
+
+    /* Mobile navigation styles */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 64px; /* Adjust based on header height */
+      left: 0;
+      width: 100%;
+      background-color: #1e293b; /* Same as header in light mode */
+      padding: 1rem 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
+      z-index: 10;
+    }
+    .mobile-nav a {
+      padding: 0.75rem 1.5rem;
+      text-align: center;
+      width: 100%;
+    }
+    .mobile-nav.active {
+      display: flex;
+    }
+  </style>
+  </head>
+  <body
+    class="bg-slate-900 text-slate-300 font-sans min-h-screen flex flex-col">
+
+    <header
+      class="flex items-center justify-between px-8 py-4 bg-slate-800 shadow-md relative">
+      <h1 class="font-extrabold text-yellow-400 text-lg tracking-wide select-none">Teyvat Store</h1>
+
+      <!-- Desktop Navigation -->
+      <nav id="desktop-nav"
+        class="hidden sm:flex gap-8 text-slate-300 font-medium tracking-wide ml-auto">
+        <a href="index.html" class="hover:text-white transition">HOME</a>
+        <a href="skyevent.html" class="hover:text-white transition">Sky: Children of The
+          Light</a>
+        <a href="roblox.html" class="hover:text-white transition">Roblox</a>
+        <a href="#" class="hover:text-white transition">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-4 ml-auto sm:ml-0">
+        <!-- Burger Menu Button (for mobile) -->
+        <button id="burger-button"
+          class="sm:hidden text-white focus:outline-none">
+          <svg id="burger-icon" class="w-6 h-6" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="close-icon" class="w-6 h-6 hidden" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation (hidden by default) -->
+      <nav id="mobile-nav" class="mobile-nav">
+        <a href="index.html" class="hover:text-white transition">HOME</a>
+        <a href="skyevent.html" class="hover:text-white transition">Sky: Children of The
+          Light</a>
+        <a href="#" class="hover:text-white transition">Genshin Impact</a>
+        <a href="#" class="hover:text-white transition">Contact</a>
+      </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto flex-grow px-6 py-12">
+      <section class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl font-extrabold text-slate-100 mb-3">GENSHIN IMPACT</h2>
+        <p class="text-slate-400 leading-relaxed text-md">
+          Menyediakan pembelian Gnostic Hymn dan Gnostic Chorus untuk petualanganmu di Teyvat.
+        </p>
+      </section>
+
+      <section id="genshin-items"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Gnostic Hymn -->
+        <article class="card-bg p-5 flex flex-col gap-4 relative">
+          <div
+            class="absolute top-4 left-4 bg-emerald-600 rounded px-2.5 py-0.5 text-xs font-semibold uppercase select-none">Tersedia</div>
+          <img src="genshin/hymn.png" alt="Gnostic Hymn"
+            class="rounded-lg object-cover w-full h-40" />
+          <h3 class="font-semibold text-white text-lg">Gnostic Hymn</h3>
+          <p class="text-slate-300 text-sm leading-snug">▹ Via login.</p>
+          <div>
+            <p class="text-xs text-slate-400 mb-1">J Store</p>
+            <div class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+              <div style="width:100%"
+                class="bg-emerald-500 h-3 rounded-full transition-all"></div>
+            </div>
+            <p class="text-xl text-slate-400 mt-1 text-right">Rp 140.000</p>
+          </div>
+        </article>
+
+        <!-- Gnostic Chorus -->
+        <article class="card-bg p-5 flex flex-col gap-4 relative">
+          <div
+            class="absolute top-4 left-4 bg-sky-600 rounded px-2.5 py-0.5 text-xs font-semibold uppercase select-none">Tersedia</div>
+          <img src="genshin/chorus.png" alt="Gnostic Chorus"
+            class="rounded-lg object-cover w-full h-40" />
+          <h3 class="font-semibold text-white text-lg">Gnostic Chorus</h3>
+          <p class="text-slate-300 text-sm leading-snug">▹ Via login.</p>
+          <div>
+            <p class="text-xs text-slate-400 mb-1">J Store</p>
+            <div class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+              <div style="width:100%"
+                class="bg-sky-500 h-3 rounded-full transition-all"></div>
+            </div>
+            <p class="text-xl text-slate-400 mt-1 text-right">Rp 270.000</p>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <footer class="text-center text-xs text-slate-500 py-6 select-none">
+      2025 Teyvat Store. Terima kasih sudah menjadi bagian dari petualangan kami di Teyvat ✨
+    </footer>
+
+    <script>
+    // Burger Menu Toggle
+    const burgerButton = document.getElementById('burger-button');
+    const mobileNav = document.getElementById('mobile-nav');
+    const burgerIcon = document.getElementById('burger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    burgerButton.addEventListener('click', () => {
+      mobileNav.classList.toggle('active');
+      burgerIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Close mobile nav when a link is clicked (optional)
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+        burgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+
+    // Hide mobile nav and show desktop nav on resize if screen is large enough
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 640) { // Tailwind's 'sm' breakpoint
+        mobileNav.classList.remove('active');
+        burgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    });
+  </script>
+
+  </body>
+</html>

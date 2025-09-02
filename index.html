@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home - J Store</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+        <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Transisi untuk perubahan warna latar belakang dan teks */
+        html.dark body {
+            background-color: #1a202c; /* Warna latar belakang gelap */
+            color: #e2e8f0; /* Warna teks terang */
+        }
+        html.dark .bg-white {
+            background-image: linear-gradient(to right, #2d3748, #4a5568); /* Warna latar belakang elemen putih di mode gelap */
+        }
+        html.dark .text-gray-900 {
+            color: #e2e8f0; /* Warna teks gelap di mode gelap */
+        }
+        html.dark .text-gray-600 {
+            color: #a0aec0; /* Warna teks abu-abu di mode gelap */
+        }
+        html.dark .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2); /* Bayangan lebih gelap */
+        }
+        html.dark .bg-gray-50 {
+            background-color: #2d3748;
+        }
+        html.dark .bg-gradient-to-r {
+            background-image: linear-gradient(to right, #2d3748, #4a5568);
+        }
+        html.dark .from-blue-50 {
+            --tw-gradient-from: #2d3748;
+            --tw-gradient-to: #2d3748;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+        }
+        html.dark .to-indigo-50 {
+            --tw-gradient-to: #4a5568;
+        }
+        html.dark .bg-blue-100 {
+            background-color: #4299e1;
+        }
+        html.dark .bg-green-100 {
+            background-color: #48bb78;
+        }
+        html.dark .bg-purple-100 {
+            background-color: #9f7aea;
+        }
+        html.dark .bg-gray-900 {
+            background-color: #1a202c;
+        }
+        html.dark .text-gray-400 {
+            color: #a0aec0;
+        }
+        html.dark .border-gray-800 {
+            border-color: #4a5568;
+        }
+        html.dark .bg-gradient-to-br {
+            background-image: linear-gradient(to bottom right, #4299e1, #805ad5);
+        }
+        html.dark .bg-yellow-400 {
+            background-color: #ecc94b;
+        }
+        html.dark .bg-pink-400 {
+            background-color: #ed64a6;
+        }
+        html.dark .text-blue-600 {
+            color: #63b3ed;
+        }
+        html.dark .hover\:text-blue-600:hover {
+            color: #63b3ed;
+        }
+        html.dark .border-blue-600 {
+            border-color: #63b3ed;
+        }
+        html.dark .hover\:bg-blue-600:hover {
+            background-color: #63b3ed;
+        }
+        html.dark .bg-blue-600 {
+            background-color: #63b3ed;
+        }
+        html.dark .hover\:bg-blue-700:hover {
+            background-color: #4299e1;
+        }
+        html.dark .text-blue-500 {
+            color: #63b3ed;
+        }
+        html.dark .bg-green-500 {
+            background-color: #48bb78;
+        }
+        html.dark .hover\:bg-green-600:hover {
+            background-color: #38a169;
+        }
+        html.dark .bg-black {
+            background-color: #1a202c;
+        }
+        html.dark .hover\:bg-gray-800:hover {
+            background-color: #2d3748;
+        }
+        html.dark .bg-pink-600 {
+            background-color: #ed64a6;
+        }
+        html.dark .hover\:bg-pink-700:hover {
+            background-color: #d53f8c;
+        }
+
+        /* CSS untuk Popup Gambar */
+        .image-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .image-popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .image-popup-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-popup-content img {
+            max-width: 100%;
+            max-height: 80vh; /* Batasi tinggi gambar agar tidak terlalu besar */
+            display: block;
+            border-radius: 4px;
+        }
+
+        .image-popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .image-popup-close:hover {
+            background-color: #eee;
+            color: #000;
+        }
+
+        /* Dark mode adjustments for popup */
+        html.dark .image-popup-content {
+            background-color: #2d3748;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        html.dark .image-popup-close {
+            color: #e2e8f0;
+        }
+
+        html.dark .image-popup-close:hover {
+            background-color: #4a5568;
+            color: #e2e8f0;
+        }
+    </style>
+    </head>
+    <body class="bg-gray-50 min-h-screen transition-colors duration-300">
+        <!-- Header Section -->
+        <header class="bg-white shadow-sm transition-colors duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-bold text-blue-600">J
+                            Store</div>
+                    </div>
+                    <!-- Tombol Hamburger untuk Mobile -->
+                    <div class="-mr-2 flex md:hidden">
+                        <button id="mobile-menu-button" type="button"
+                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                            aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <!-- Icon when menu is closed. -->
+                            <svg class="block h-6 w-6"
+                                xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor"
+                                aria-hidden="true">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            <!-- Icon when menu is open. -->
+                            <svg class="hidden h-6 w-6"
+                                xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor"
+                                aria-hidden="true">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <nav class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-4">
+                            <a href="#"
+                                class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-300">Beranda</a>
+                            <a href="skyevent.html"
+                                class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-300">Sky:
+                                Children of The Light</a>
+                            <a href="roblox.html"
+                                class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-300">Roblox</a>
+                            <a href="review.html"
+                                class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-300">Review</a>
+                            <!-- Tombol Mode Gelap/Terang -->
+                            <button id="theme-toggle"
+                                class="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-300">
+                                <i class="fas fa-moon"
+                                    id="theme-toggle-icon"></i>
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Mobile menu, show/hide based on menu state. -->
+            <div class="md:hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="#"
+                        class="text-gray-600 hover:bg-gray-100 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300">Beranda</a>
+                    <a href="skyevent.html"
+                        class="text-gray-600 hover:bg-gray-100 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300">Sky:
+                        Children of The Light</a>
+                    <a href="roblox.html"
+                        class="text-gray-600 hover:bg-gray-100 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300">Roblox</a>
+                    <a href="review.html"
+                        class="text-gray-600 hover:bg-gray-100 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300">Review</a>
+                    <button id="mobile-theme-toggle"
+                        class="text-gray-600 hover:bg-gray-100 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 w-full text-left">
+                        <i class="fas fa-moon"
+                            id="mobile-theme-toggle-icon"></i> Mode Gelap/Terang
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section
+            class="py-16 bg-gray-50 from-blue-50 to-indigo-50 transition-colors duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- Left Column - Title and Subtitle -->
+                    <div class="text-center md:text-left">
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight transition-colors duration-300">
+                            Selamat Datang di <span class="text-blue-600">J
+                                Store</span><span class="lg:text-5xl">✨</span>
+                        </h1>
+                        <p
+                            class="mt-6 text-1xl text-gray-600 leading-relaxed transition-colors duration-300">
+                            Tempat terbaik untuk mendapatkan item, bundle, dan
+                            season pass game Sky: Children of the Light.
+                            Kami hadir untuk menemani perjalananmu di langit,
+                            dengan layanan cepat, aman, murah dan terpercaya.
+                        </p>
+                        <p
+                            class="mt-6 text-1xl text-gray-600 leading-relaxed transition-colors duration-300">
+                            Yuk, wujudkan petualanganmu jadi lebih indah
+                            bersama J Store!
+                        </p>
+                        <div
+                            class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                            <button
+                                onclick="window.open('https://wa.me/6289504041209','_blank')"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
+                                Beli Sekarang
+                            </button>
+
+                            <button
+                                onclick="window.open('https://chat.whatsapp.com/IA8EksqKDVRHpp2a4gYVfQ','_blank')"
+                                class="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
+                                Grup WhatsApp
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Picture -->
+                    <div class="flex justify-center md:justify-end">
+                        <div class="relative">
+                            <div
+                                class="w-80 h-80 bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden transition-colors duration-300">
+                                <img src="img/logo.png" alt="J Store"
+                                    class="object-cover w-full h-full rounded-2xl" />
+                            </div>
+                            <div
+                                class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 rounded-full opacity-20 transition-colors duration-300"></div>
+                            <div
+                                class="absolute -bottom-4 -left-4 w-16 h-16 bg-pink-400 rounded-full opacity-20 transition-colors duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Content -->
+        <section class="py-16 bg-white transition-colors duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2
+                        class="text-3xl font-bold text-gray-900 transition-colors duration-300">Mengapa
+                        Memilih
+                        Kami?</h2>
+                    <p
+                        class="mt-4 text-lg text-gray-600 transition-colors duration-300">Keunggulan
+                        yang
+                        membuat kami berbeda</p>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="text-center p-6 bg-gray-50 rounded-lg transition-colors duration-300">
+                        <div
+                            class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
+                            <i class="fas fa-rocket text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3
+                            class="text-xl font-semibold text-gray-900 transition-colors duration-300">Cepat
+                            dan Efisien</h3>
+                        <p
+                            class="mt-2 text-gray-600 transition-colors duration-300">Layanan
+                            yang cepat dengan
+                            hasil yang maksimal</p>
+                    </div>
+
+                    <div
+                        class="text-center p-6 bg-gray-50 rounded-lg transition-colors duration-300">
+                        <div
+                            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
+                            <i
+                                class="fas fa-shield-alt text-green-600 text-2xl"></i>
+                        </div>
+                        <h3
+                            class="text-xl font-semibold text-gray-900 transition-colors duration-300">Aman
+                            dan
+                            Terpercaya</h3>
+                        <p
+                            class="mt-2 text-gray-600 transition-colors duration-300">Keamanan
+                            data adalah
+                            prioritas utama kami</p>
+                    </div>
+
+                    <div
+                        class="text-center p-6 bg-gray-50 rounded-lg transition-colors duration-300">
+                        <div
+                            class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
+                            <i
+                                class="fas fa-headset text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3
+                            class="text-xl font-semibold text-gray-900 transition-colors duration-300">Dukungan
+                            24/7</h3>
+                        <p
+                            class="mt-2 text-gray-600 transition-colors duration-300">Tim
+                            support siap membantu
+                            kapan saja</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Games Section (ganti RideShare lama) -->
+        <section class="py-16 bg-gray-50 transition-colors duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2
+                        class="text-3xl font-bold text-gray-900 transition-colors duration-300">Best
+                        Seller Games</h2>
+                    <p
+                        class="mt-4 text-lg text-gray-600 transition-colors duration-300">Temukan
+                        game dan event terbaru di sini!</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <!-- Sky Children of The Light -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <img src="img/sky.png" alt="Sky: Children of The Light"
+                            class="w-full h-64 object-cover">
+                        <div class="p-4 text-center">
+                            <span
+                                class="inline-block bg-yellow-400 text-xs font-semibold px-2 py-1 rounded mb-2">Best
+                                Games</span>
+                            <h3 class="text-xl font-semibold text-gray-900">Sky:
+                                Children of The Light</h3>
+                            <p
+                                class="text-yellow-500 font-bold mt-1 text-xs">Discount</p>
+                            <button
+                                onclick="window.open('skyevent.html','_blank')"
+                                class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">Top
+                                Up</button>
+                        </div>
+                    </div>
+
+                    <!-- Roblox -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <img src="img/rblx.png" alt="Roblox"
+                            class="w-full h-64 object-cover">
+                        <div class="p-4 text-center">
+                            <span
+                                class="inline-block bg-orange-500 text-xs font-semibold px-2 py-1 rounded mb-2">Best
+                                Games</span>
+                            <h3
+                                class="text-xl font-semibold text-gray-900">Roblox</h3>
+                            <p
+                                class="text-yellow-500 font-bold mt-1 text-xs">Discount</p>
+                            <button
+                                onclick="window.open('roblox.html','_blank')"
+                                class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">Top
+                                Up</button>
+                        </div>
+                    </div>
+
+                    <!-- Genshin Impact -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <img src="img/genshin.png" alt="Genshin Impact"
+                            class="w-full h-64 object-cover">
+                        <div class="p-4 text-center">
+                            <span
+                                class="inline-block bg-purple-500 text-xs font-semibold px-2 py-1 rounded mb-2">Best
+                                Games</span>
+                            <h3
+                                class="text-xl font-semibold text-gray-900">Genshin
+                                Impact</h3>
+                            <p
+                                class="text-yellow-500 font-bold mt-1 text-xs">Discount</p>
+                            <button
+                                onclick="window.open('genshinim.html','_blank')"
+                                class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">Top
+                                Up</button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Legends -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <img src="img/mobileleg.png" alt="Mobile Legends"
+                            class="w-full h-64 object-cover">
+                        <div class="p-4 text-center">
+                            <span
+                                class="inline-block bg-pink-500 text-xs font-semibold px-2 py-1 rounded mb-2">Best
+                                Games</span>
+                            <h3
+                                class="text-xl font-semibold text-gray-900">Mobile
+                                Legends</h3>
+                            <p
+                                class="text-yellow-500 font-bold mt-1 text-xs">Coming
+                                Soon</p>
+                            <button
+                                onclick="window.open('comingsoon.html','_blank')"
+                                class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">Top
+                                Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer
+            class="bg-gray-900 text-white py-12 transition-colors duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Tentang Kami</h4>
+                        <p
+                            class="text-gray-400 transition-colors duration-300">Kami
+                            hadir untuk menemani
+                            setiap langkah perjalananmu di dunia Sky: Children
+                            of the Light.
+                            Melalui J Store, kamu bisa menemukan berbagai item
+                            eksklusif, bundle menarik, hingga season pass,
+                            dengan pelayanan ramah dan terpercaya.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Layanan</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#"
+                                    class="hover:text-white transition-colors duration-300">Roblox</a></li>
+                            <li><a href="#"
+                                    class="hover:text-white transition-colors duration-300">Genshin
+                                    Impact</a></li>
+                            <li><a href="#"
+                                    class="hover:text-white transition-colors duration-300">Mobile
+                                    Legends</a></li>
+                            <li><a href="#"
+                                    class="hover:text-white transition-colors duration-300">Sky:
+                                    Children
+                                    of the Light</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Kontak</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>WhatsApp: <a href="https://wa.me/6289504041209"
+                                    target="_blank"
+                                    class="text-blue-500 hover:underline transition-colors duration-300">J
+                                    Store</a></li>
+                            <li>Tiktok: <a
+                                    href="https://www.tiktok.com/@j_storeskycotl"
+                                    target="_blank"
+                                    class="text-blue-500 hover:underline transition-colors duration-300">J
+                                    Store</a></li>
+                            <li>Address: Jawa Timur, Indonesia</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <!-- WhatsApp -->
+                            <a
+                                href="https://chat.whatsapp.com/IA8EksqKDVRHpp2a4gYVfQ"
+                                target="_blank"
+                                class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors duration-300">
+                                <i class="fab fa-whatsapp text-white"></i>
+                            </a>
+
+                            <!-- TikTok -->
+                            <a href="https://www.tiktok.com/@j_storeskycotl"
+                                target="_blank"
+                                class="w-10 h-10 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors duration-300">
+                                <i class="fab fa-tiktok text-white"></i>
+                            </a>
+
+                            <!-- Instagram -->
+                            <a href="https://www.instagram.com/j_storeskycotl/"
+                                target="_blank"
+                                class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors duration-300">
+                                <i class="fab fa-instagram text-white"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div
+                    class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 transition-colors duration-300">
+                    <p>&copy; 2025 J Store. Terima kasih sudah menjadi bagian
+                        dari perjalanan kami di langit ✨</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Image Popup Structure -->
+        <div id="image-popup-overlay" class="image-popup-overlay">
+            <div class="image-popup-content">
+                <button id="image-popup-close"
+                    class="image-popup-close">&times;</button>
+                <img id="image-popup-img" src alt="Full Size Image">
+            </div>
+        </div>
+
+        <script>
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeToggleIcon = document.getElementById('theme-toggle-icon');
+            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            const mobileThemeToggleIcon = document.getElementById('mobile-theme-toggle-icon');
+            const htmlElement = document.documentElement;
+
+            // Cek preferensi tema dari localStorage atau sistem
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                htmlElement.classList.add(currentTheme);
+                if (currentTheme === 'dark') {
+                    themeToggleIcon.classList.remove('fa-moon');
+                    themeToggleIcon.classList.add('fa-sun');
+                    mobileThemeToggleIcon.classList.remove('fa-moon');
+                    mobileThemeToggleIcon.classList.add('fa-sun');
+                } else {
+                    themeToggleIcon.classList.remove('fa-sun');
+                    themeToggleIcon.classList.add('fa-moon');
+                    mobileThemeToggleIcon.classList.remove('fa-sun');
+                    mobileThemeToggleIcon.classList.add('fa-moon');
+                }
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                htmlElement.classList.add('dark');
+                themeToggleIcon.classList.remove('fa-moon');
+                themeToggleIcon.classList.add('fa-sun');
+                mobileThemeToggleIcon.classList.remove('fa-moon');
+                mobileThemeToggleIcon.classList.add('fa-sun');
+            } else {
+                htmlElement.classList.add('light');
+                themeToggleIcon.classList.remove('fa-sun');
+                themeToggleIcon.classList.add('fa-moon');
+                mobileThemeToggleIcon.classList.remove('fa-sun');
+                mobileThemeToggleIcon.classList.add('fa-moon');
+            }
+
+            // Fungsi untuk mengganti tema
+            const toggleTheme = () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                    themeToggleIcon.classList.remove('fa-sun');
+                    themeToggleIcon.classList.add('fa-moon');
+                    mobileThemeToggleIcon.classList.remove('fa-sun');
+                    mobileThemeToggleIcon.classList.add('fa-moon');
+                } else {
+                    htmlElement.classList.remove('light');
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggleIcon.classList.remove('fa-moon');
+                    themeToggleIcon.classList.add('fa-sun');
+                    mobileThemeToggleIcon.classList.remove('fa-moon');
+                    mobileThemeToggleIcon.classList.add('fa-sun');
+                }
+            };
+
+            themeToggle.addEventListener('click', toggleTheme);
+            mobileThemeToggle.addEventListener('click', toggleTheme);
+
+
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenu.style.display = 'none'; // Sembunyikan menu mobile secara default
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+
+                // Toggle visibility of menu
+                if (mobileMenu.style.display === 'none') {
+                    mobileMenu.style.display = 'block';
+                    mobileMenuButton.querySelector('.block').classList.add('hidden');
+                    mobileMenuButton.querySelector('.hidden').classList.remove('hidden');
+                } else {
+                    mobileMenu.style.display = 'none';
+                    mobileMenuButton.querySelector('.block').classList.remove('hidden');
+                    mobileMenuButton.querySelector('.hidden').classList.add('hidden');
+                }
+            });
+
+            // Image Popup Functionality
+            const imagePopupOverlay = document.getElementById('image-popup-overlay');
+            const imagePopupImg = document.getElementById('image-popup-img');
+            const imagePopupClose = document.getElementById('image-popup-close');
+            const galleryImages = document.querySelectorAll('.grid img[data-full-src]'); // Select images with data-full-src
+
+            galleryImages.forEach(image => {
+                image.addEventListener('click', () => {
+                    const fullSrc = image.getAttribute('data-full-src');
+                    imagePopupImg.src = fullSrc;
+                    imagePopupOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is active
+                });
+            });
+
+            imagePopupClose.addEventListener('click', () => {
+                imagePopupOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            imagePopupOverlay.addEventListener('click', (e) => {
+                // Close popup if clicked outside the image content
+                if (e.target === imagePopupOverlay) {
+                    imagePopupOverlay.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+
+            // Close popup with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && imagePopupOverlay.classList.contains('active')) {
+                    imagePopupOverlay.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+        </script>
+    </body>
+</html>

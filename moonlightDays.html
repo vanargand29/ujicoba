@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Days of Moonlight - J Store</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #4ade80;
+      border-radius: 3px;
+    }
+
+    /* Card */
+    .card-bg {
+      background-color: #1e293b;
+      box-shadow: 0 4px 14px rgb(15 23 42 / 0.7);
+      border-radius: 0.5rem;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transition: max-height 0.3s ease-out;
+      overflow: hidden;
+      max-height: 0;
+    }
+    .mobile-menu.open {
+      max-height: 500px;
+      transition: max-height 0.5s ease-in;
+    }
+  </style>
+    </head>
+    <body
+        class="bg-slate-900 text-slate-300 font-sans min-h-screen flex flex-col">
+
+        <!-- Header -->
+        <header
+            class="bg-slate-800 text-gray-100 p-4 shadow-lg sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <a href="index.html"
+                    class="flex items-center gap-2 text-2xl font-bold text-yellow-400 hover:text-yellow-300">
+                    J Store
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-6">
+                    <a href="index.html"
+                        class="hover:text-white transition">Home</a>
+                    <a href="skyevent.html"
+                        class="hover:text-white transition">Sky:
+                        Children of The Light</a>
+                    <a href="roblox.html"
+                        class="hover:text-white transition">Roblox</a>
+                    <a href="#" class="hover:text-white transition">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button"
+                        class="text-gray-300 hover:text-white p-2 focus:outline-none">
+                        <svg id="menu-icon-open" class="h-6 w-6" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="menu-icon-close" class="h-6 w-6 hidden"
+                            fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav id="mobile-menu"
+                class="mobile-menu lg:hidden bg-gray-700 mt-4 rounded-md">
+                <ul class="flex flex-col space-y-3 p-4">
+                    <li><a href="index.html"
+                            class="block hover:text-white">Home</a></li>
+                    <li><a href="skyevent.html"
+                            class="block hover:text-white">Sky: Children
+                            of The Light</a></li>
+                    <li><a href="roblox.html"
+                            class="block hover:text-white">Roblox</a></li>
+                    <li><a href="#"
+                            class="block hover:text-white">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main -->
+        <main class="max-w-7xl mx-auto flex-grow px-6 py-12">
+            <header class="text-center mb-12">
+                <h1 class="text-4xl font-semibold text-gray-100 mb-3">DAYS OF
+                    SUNLIGHT</h1>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+                    Event tahunan yang menghadirkan bundle & item spesial musim
+                    panas ☀️<br>
+                    Sky: Children of The Light
+                </p>
+            </header>
+            <h2 id="featured-characters-heading"
+                class="text-gray-200 font-semibold mb-3">Event Days of
+                Sunlight</h2>
+            <p class="text-sm text-gray-400 mb-6">1 September 2025.</p>
+            <!-- Grid Items -->
+            <section id="sunlight-items"
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                <!-- Moonlight Garland Cape -->
+                <article class="card-bg p-5 flex flex-col gap-4 relative">
+                    <div
+                        class="absolute top-4 left-4 bg-emerald-600 rounded px-2.5 py-0.5 text-xs font-semibold uppercase select-none">New</div>
+                    <img src="moonlight/garlandcape.png"
+                        alt="Moonlight Garland Cape"
+                        class="rounded-lg object-cover w-full h-40 cursor-pointer" />
+                    <h3
+                        class="font-semibold text-white text-lg uppercase">MOONLIGHT
+                        GARLAND CAPE</h3>
+                    <p class="text-slate-300 text-sm leading-snug">▹ Cape
+                        Moonlight Garland<br>▹ Menggunakan Sky ID</p>
+                    <div>
+                        <p class="text-xs text-slate-400 mb-1">J Store</p>
+                        <div
+                            class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                            <div style="width:100%"
+                                class="bg-emerald-500 h-3 rounded-full transition-all"></div>
+                        </div>
+                        <p class="text-xl text-slate-400 mt-1 text-right">Rp
+                            200.000</p>
+                    </div>
+                </article>
+
+                <!-- Moonlight Earrings -->
+                <article class="card-bg p-5 flex flex-col gap-4 relative">
+                    <div
+                        class="absolute top-4 left-4 bg-sky-600 rounded px-2.5 py-0.5 text-xs font-semibold uppercase select-none">Tersedia</div>
+                    <img src="moonlight/earrings.png"
+                        alt="Moonlight Earrings"
+                        class="rounded-lg object-cover w-full h-40 cursor-pointer" />
+                    <h3
+                        class="font-semibold text-white text-lg uppercase">MOONLIGHT
+                        EARRINGS</h3>
+                    <p class="text-slate-300 text-sm leading-snug">▹ Anting
+                        Moonlight<br>▹ Menggunakan Sky ID</p>
+                    <div>
+                        <p class="text-xs text-slate-400 mb-1">J Store</p>
+                        <div
+                            class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                            <div style="width:100%"
+                                class="bg-sky-500 h-3 rounded-full transition-all"></div>
+                        </div>
+                        <p class="text-xl text-slate-400 mt-1 text-right">Rp
+                            45.000</p>
+                    </div>
+                </article>
+
+                <!-- Bunny Accessory -->
+                <article class="card-bg p-5 flex flex-col gap-4 relative">
+                    <div
+                        class="absolute top-4 left-4 bg-rose-600 rounded px-2.5 py-0.5 text-xs font-semibold uppercase select-none">Best Seller</div>
+                    <img src="moonlight/bunnyaccessory.png"
+                        alt="Bunny Accessory"
+                        class="rounded-lg object-cover w-full h-40 cursor-pointer" />
+                    <h3 class="font-semibold text-white text-lg uppercase">BUNNY
+                        ACCESSORY</h3>
+                    <p class="text-slate-300 text-sm leading-snug">▹ Aksesoris
+                        Bunny<br>▹ Menggunakan Sky ID</p>
+                    <div>
+                        <p class="text-xs text-slate-400 mb-1">J Store</p>
+                        <div
+                            class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                            <div style="width:100%"
+                                class="bg-rose-500 h-3 rounded-full transition-all"></div>
+                        </div>
+                        <p class="text-xl text-slate-400 mt-1 text-right">Rp
+                            45.000</p>
+                    </div>
+                </article>
+
+                <!-- Style Bunny Slippers -->
+                <article class="card-bg p-5 flex flex-col gap-4 relative">
+                    <div
+                        class="absolute top-4 left-4 bg-emerald-600 rounded px-2.5 py-0.5 text-xs font-semibold uppercase select-none">Tersedia</div>
+                    <img src="moonlight/bunnyslippers.png"
+                        alt="Style Bunny Slippers"
+                        class="rounded-lg object-cover w-full h-40 cursor-pointer" />
+                    <h3 class="font-semibold text-white text-lg uppercase">STYLE
+                        BUNNY SLIPPERS</h3>
+                    <p class="text-slate-300 text-sm leading-snug">▹ Sandal
+                        Bunny Style<br>▹ Menggunakan Sky ID</p>
+                    <div>
+                        <p class="text-xs text-slate-400 mb-1">J Store</p>
+                        <div
+                            class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                            <div style="width:100%"
+                                class="bg-emerald-500 h-3 rounded-full transition-all"></div>
+                        </div>
+                        <p class="text-xl text-slate-400 mt-1 text-right">Rp
+                            100.000</p>
+                    </div>
+                </article>
+
+                <!-- Moonlight Frock and Updo -->
+                <article class="card-bg p-5 flex flex-col gap-4 relative">
+                    <div
+                        class="absolute top-4 left-4 bg-sky-600 rounded px-2.5 py-0.5 text-xs font-semibold uppercase select-none">Best
+                        Seller</div>
+                    <img src="moonlight/frockupdo.png"
+                        alt="Moonlight Frock and Updo"
+                        class="rounded-lg object-cover w-full h-40 cursor-pointer" />
+                    <h3
+                        class="font-semibold text-white text-lg uppercase">MOONLIGHT
+                        FROCK AND UPDO</h3>
+                    <p class="text-slate-300 text-sm leading-snug">▹ Gaun +
+                        Rambut Moonlight<br>▹ Menggunakan Sky ID</p>
+                    <div>
+                        <p class="text-xs text-slate-400 mb-1">J Store</p>
+                        <div
+                            class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                            <div style="width:100%"
+                                class="bg-sky-500 h-3 rounded-full transition-all"></div>
+                        </div>
+                        <p class="text-xl text-slate-400 mt-1 text-right">Rp
+                            200.000</p>
+                    </div>
+                </article>
+
+                <!-- Summer Lantern Pack -->
+                <article class="card-bg p-5 flex flex-col gap-4 relative">
+                    <div
+                        class="absolute top-4 left-4 bg-rose-600 rounded px-2.5 py-0.5 text-xs font-semibold uppercase select-none">Tersedia</div>
+                    <img src="moonlight/lanternpack.png"
+                        alt="Summer Lantern Pack"
+                        class="rounded-lg object-cover w-full h-40 cursor-pointer" />
+                    <h3
+                        class="font-semibold text-white text-lg uppercase">SUMMER
+                        LANTERN PACK</h3>
+                    <p class="text-slate-300 text-sm leading-snug">▹ Paket
+                        Lentera Musim Panas<br>▹ Menggunakan Sky ID</p>
+                    <div>
+                        <p class="text-xs text-slate-400 mb-1">J Store</p>
+                        <div
+                            class="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
+                            <div style="width:100%"
+                                class="bg-rose-500 h-3 rounded-full transition-all"></div>
+                        </div>
+                        <p class="text-xl text-slate-400 mt-1 text-right">Rp
+                            270.000</p>
+                    </div>
+                </article>
+
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center text-xs text-slate-500 py-6 select-none">
+            2025 J Store. Terima kasih sudah menjadi bagian dari perjalanan kami
+            di langit ✨
+        </footer>
+
+        <!-- Image Popup Overlay -->
+        <div id="image-popup-overlay"
+            class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+            <div class="relative">
+                <img id="popup-image" src alt="Popup Image"
+                    class="max-w-full max-h-screen object-contain">
+                <button id="close-popup-button"
+                    class="absolute top-4 right-4 text-white text-3xl font-bold bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-700 focus:outline-none">
+                    &times;
+                </button>
+            </div>
+        </div>
+
+        <!-- Script -->
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIconOpen = document.getElementById('menu-icon-open');
+      const menuIconClose = document.getElementById('menu-icon-close');
+
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('open');
+        menuIconOpen.classList.toggle('hidden');
+        menuIconClose.classList.toggle('hidden');
+      });
+
+      // Close on link click
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('open');
+          menuIconOpen.classList.remove('hidden');
+          menuIconClose.classList.add('hidden');
+        });
+      });
+
+      // --- New JavaScript for Image Popup ---
+      const imagePopupOverlay = document.getElementById('image-popup-overlay');
+      const popupImage = document.getElementById('popup-image');
+      const closePopupButton = document.getElementById('close-popup-button');
+      const sunlightItems = document.getElementById('sunlight-items'); // Get the section containing the images
+
+      // Add click listener to each image within the sunlight-items section
+      sunlightItems.querySelectorAll('img').forEach(image => {
+        image.addEventListener('click', function() {
+          popupImage.src = this.src; // Set the source of the popup image to the clicked image's source
+          imagePopupOverlay.classList.remove('hidden'); // Show the overlay
+        });
+      });
+
+      // Close popup when close button is clicked
+      closePopupButton.addEventListener('click', function() {
+        imagePopupOverlay.classList.add('hidden'); // Hide the overlay
+        popupImage.src = ''; // Clear the image source
+      });
+
+      // Close popup when clicking outside the image (on the overlay itself)
+      imagePopupOverlay.addEventListener('click', function(event) {
+        if (event.target === imagePopupOverlay) { // Check if the click was directly on the overlay
+          imagePopupOverlay.classList.add('hidden'); // Hide the overlay
+          popupImage.src = ''; // Clear the image source
+        }
+      });
+
+      // Close popup when Escape key is pressed
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && !imagePopupOverlay.classList.contains('hidden')) {
+          imagePopupOverlay.classList.add('hidden'); // Hide the overlay
+          popupImage.src = ''; // Clear the image source
+        }
+      });
+    });
+  </script>
+    </body>
+</html>

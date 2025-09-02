@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coming Soon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Inter&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #eee;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .j-store-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: #eee;
+      user-select: none;
+    }
+    nav a {
+      font-size: 0.9rem;
+      color: #eee;
+      transition: color 0.2s ease;
+    }
+    nav a:hover {
+      color: #8b5cf6; /* violet-500 */
+    }
+    nav span.separator {
+      margin: 0 0.5rem;
+      color: #777;
+    }
+
+    .gradient-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 4rem;
+      position: relative;
+      background: linear-gradient(90deg, #4ade80, #14b8a6, #3b82f6, #a78bfa, #f87171);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      user-select: none;
+      overflow: hidden;
+    }
+
+    .gradient-text::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: skewX(-25deg);
+      animation: shimmer 2.5s infinite;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -75%;
+      }
+      100% {
+        left: 125%;
+      }
+    }
+
+    header {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    footer {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #666;
+      user-select: none;
+    }
+
+    .loading-container {
+      position: relative;
+      width: 300px;
+      height: 24px;
+      background-color: #222;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 2rem;
+      user-select: none;
+    }
+
+    .loading-bar {
+      position: absolute;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #4ade80, #14b8a6, #3b82f6, #a78bfa, #f87171);
+      border-radius: 12px 0 0 12px;
+      animation: loadingAnim 3s linear infinite;
+    }
+
+    .loading-text {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      color: #eee;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @keyframes loadingAnim {
+      0% {
+        width: 0%;
+      }
+      50% {
+        width: 100%;
+      }
+      100% {
+        width: 0%;
+      }
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      width: 24px;
+      height: 20px;
+      justify-content: space-between;
+    }
+    .burger span {
+      height: 3px;
+      width: 100%;
+      background: #eee;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: #121212;
+      position: absolute;
+      top: 64px;
+      right: 2rem;
+      border: 1px solid #333;
+      border-radius: 0.25rem;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+    .mobile-menu a {
+      padding: 0.5rem 0;
+      color: #eee;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      .burger {
+        display: flex;
+      }
+      .mobile-menu {
+        right: 1rem;
+      }
+      .loading-container {
+        width: 250px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="j-store-text" aria-label="Company name J Store">J Store</div>
+    <nav>
+      <div class="nav-menu" aria-label="Primary navigation">
+        <a href="index.html" tabindex="0">Home</a>
+        <span class="separator">/</span>
+        <a href="skyevent.html" tabindex="0">Sky: Children of The Light</a>
+        <span class="separator">/</span>
+        <a href="roblox.html" tabindex="0">Roblox</a>
+      </div>
+      <div class="burger" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="mobile-menu" id="mobileMenu" aria-label="Mobile primary navigation">
+        <a href="index.html">Home</a>
+        <a href="skyevent.html">Sky: Children of The Light</a>
+        <a href="roblox.html">Roblox</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex flex-col flex-grow items-center justify-center px-6 text-center max-w-4xl mx-auto">
+    <h1 class="gradient-text select-text pointer-events-none" aria-label="Coming Soon">Coming Soon</h1>
+    <p class="mt-4 text-gray-300 max-w-md">Fitur ini sedang dalam proses pengembangan. Kami sedang menyiapkan tampilan dan fitur terbaik agar segera bisa dinikmati.</p>
+
+    <div class="loading-container" aria-label="Loading animation" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="loading-bar"></div>
+      <div class="loading-text">Loading 0%</div>
+    </div>
+
+    <p class="mt-4 text-gray-500 select-none" aria-hidden="true">-_ Mohon Ditunggu, Terimakasih _-</p>
+  </main>
+
+
+
+  <script>
+    const burger = document.querySelector('.burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function toggleMenu() {
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        mobileMenu.style.display = 'none';
+        burger.setAttribute('aria-expanded', 'false');
+      } else {
+        mobileMenu.style.display = 'flex';
+        burger.setAttribute('aria-expanded', 'true');
+      }
+    }
+    burger.addEventListener('click', toggleMenu);
+    burger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        mobileMenu.style.display = 'none';
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    const loadingBar = document.querySelector('.loading-bar');
+    const loadingText = document.querySelector('.loading-text');
+    const animationDuration = 3000;
+
+    let startTime = null;
+
+    function animateLoading(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = (timestamp - startTime) % animationDuration;
+      let progress = (elapsed / animationDuration) * 100;
+
+      if (progress <= 50) {
+        loadingText.textContent = `Loading ${Math.round(progress * 2)}%`;
+      } else {
+        loadingText.textContent = `Loading ${Math.round(200 - progress * 2)}%`;
+      }
+
+      requestAnimationFrame(animateLoading);
+    }
+
+    requestAnimationFrame(animateLoading);
+  </script>
+
+</body>
+</html></content>
+</create_file>
