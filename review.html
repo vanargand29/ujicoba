@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>J Store - Review & Rating</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -52,7 +52,8 @@
         .container-main { /* Changed from .container to avoid conflict with header .container */
             background-color: #2d3748; /* Slightly lighter dark blue for main content container */
             border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         .text-gray-800 {
             color: #e2e8f0; /* Light text for headings */
@@ -194,7 +195,7 @@
         </div>
     </nav>
 
-    <div class="container-main mx-auto px-4 py-8 mt-8">
+    <div class="container-main mx-auto px-4 py-8 mt-8 max-w-4xl">
         <header class="text-center mb-8">
             <h1 class="text-4xl font-bold">Review & Rating</h1>
             <p class="mt-2">Share your opinions and see what others think!</p>
@@ -214,20 +215,20 @@
             <form id="reviewForm">
                 <div class="mb-4">
                     <label class="block font-bold mb-2" for="email">Email</label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your email" required>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your email" required />
                 </div>
                 <div class="mb-4">
                     <label class="block font-bold mb-2" for="name">Name</label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" required>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" required />
                 </div>
                 <div class="mb-4">
                     <label class="block font-bold mb-2" for="rating">Rating</label>
                     <div class="star-rating">
-                        <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
-                        <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
-                        <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
-                        <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
-                        <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1">&#9733;</label>
                     </div>
                 </div>
                 <div class="mb-4">
@@ -236,7 +237,7 @@
                 </div>
                 <div class="mb-4">
                     <label class="block font-bold mb-2" for="photo">Photo (Optional)</label>
-                    <input type="file" id="photo" accept="image/*" class="block w-full">
+                    <input type="file" id="photo" accept="image/*" class="block w-full" />
                     <p class="text-sm mt-1">Upload a photo if you'd like.</p>
                 </div>
                 <div class="flex items-center justify-between">
@@ -257,6 +258,10 @@
         const burgerMenu = document.getElementById('burgerMenu');
         const navLinks = document.getElementById('navLinks');
 
+        // --- KONFIGURASI GOOGLE APPS SCRIPT WEB APP URL ---
+        // GANTI DENGAN URL WEB APP YANG ANDA DAPATKAN DARI GOOGLE APPS SCRIPT
+        const GOOGLE_APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzQSU8ax0EfW6IcIf8C-eSDUkE1R5WwtJC__lSH_bWtHS576FKiTDjIvVKQvKolhXA/exec'; 
+
         // Burger menu toggle
         burgerMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
@@ -264,7 +269,11 @@
 
         // Close nav links if clicked outside (optional, but good UX)
         document.addEventListener('click', (event) => {
-            if (!navLinks.contains(event.target) && !burgerMenu.contains(event.target) && navLinks.classList.contains('active')) {
+            if (
+                !navLinks.contains(event.target) &&
+                !burgerMenu.contains(event.target) &&
+                navLinks.classList.contains('active')
+            ) {
                 navLinks.classList.remove('active');
             }
         });
@@ -281,118 +290,118 @@
         });
 
         // Handle form submission
-        reviewForm.addEventListener('submit', (e) => {
+        reviewForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const name = document.getElementById('name').value;
+
+            const email = document.getElementById('email').value.trim();
+            const name = document.getElementById('name').value.trim();
             const rating = document.querySelector('input[name="rating"]:checked')?.value || '0';
-            const description = document.getElementById('description').value;
+            const description = document.getElementById('description').value.trim();
             const photoFile = document.getElementById('photo').files[0];
-            
+
             let photoUrl = null;
+
             if (photoFile) {
+                // Convert photo to Data URL (large size, not ideal but as placeholder)
                 const reader = new FileReader();
-                reader.onload = function(event) {
+                reader.onload = async function(event) {
                     photoUrl = event.target.result;
-                    saveAndDisplayReview(email, name, rating, description, photoUrl);
+                    await sendReviewToGoogleSheets(email, name, rating, description, photoUrl);
                 };
                 reader.readAsDataURL(photoFile);
             } else {
-                saveAndDisplayReview(email, name, rating, description, photoUrl);
+                await sendReviewToGoogleSheets(email, name, rating, description, photoUrl);
             }
-            
+
             modal.classList.add('hidden');
             reviewForm.reset();
         });
 
-        // Function to save and display review
-        async function saveAndDisplayReview(email, name, rating, description, photoUrl) {
-            const review = {
+        // Function to send review to Google Sheets via Apps Script Web App
+        async function sendReviewToGoogleSheets(email, name, rating, description, photoUrl) {
+            const reviewData = {
                 email,
                 name,
-                rating,
+                rating: parseInt(rating),
                 description,
-                photoUrl,
-                date: new Date().toLocaleString()
+                photoUrl: photoUrl || ''
             };
-            
-            // Save review to a text file via backend
+
             try {
-                const response = await fetch('/save-review', { 
+                const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(review)
+                    body: JSON.stringify(reviewData)
                 });
+
                 if (!response.ok) {
-                    throw new Error('Failed to save review on server.');
+                    throw new Error(`Failed to add review: ${response.statusText}`);
                 }
-                console.log('Review saved successfully on server!');
+
+                const result = await response.json();
+                console.log('Review added:', result);
+                displayReviews(); // Reload reviews after adding
             } catch (error) {
-                console.error('Error saving review:', error);
-                alert('Failed to save review. Please ensure the backend server is running.');
+                console.error('Error sending review to Google Sheets:', error);
+                alert('Failed to add review: ' + error.message);
             }
-            
-            // Display all reviews (re-fetch from the "file" for consistency)
-            displayReviews();
         }
 
-        // Function to display reviews
+        // Function to display reviews from Google Sheets
         async function displayReviews() {
             reviewsContainer.innerHTML = '';
-            let reviews = [];
 
-            // Fetch reviews from a text file via backend
             try {
-                const response = await fetch('/get-reviews'); 
-                if (response.ok) {
-                    // Mengubah dari response.text() menjadi response.json()
-                    reviews = await response.json(); 
-                } else {
-                    console.warn('No reviews found or failed to fetch reviews from server. Status:', response.status);
+                const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, {
+                    method: 'GET'
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch reviews from Google Sheets: ${response.statusText}`);
                 }
+
+                let reviews = await response.json();
+
+                if (!Array.isArray(reviews)) {
+                    reviews = [];
+                }
+
+                if (reviews.length === 0) {
+                    reviewsContainer.innerHTML = '<p class="text-center text-gray-400">No reviews yet. Be the first to add one!</p>';
+                    return;
+                }
+
+                reviews.forEach(review => {
+                    const reviewDiv = document.createElement('div');
+                    reviewDiv.className = 'review-item';
+
+                    reviewDiv.innerHTML = `
+                        <div class="flex items-start space-x-4">
+                            <div class="avatar">${review.Name.charAt(0).toUpperCase()}</div>
+                            <div class="flex-1">
+                                <div class="flex items-center mb-2">
+                                    <h3 class="text-lg font-bold">${review.Name}</h3>
+                                    <span class="ml-2 text-sm text-gray-500">${review.Timestamp}</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    ${Array.from({length: 5}, (_, i) => 
+                                        `<span class="text-yellow-400 ${i < review.Rating ? '' : 'text-gray-600'}">&#9733;</span>`
+                                    ).join('')}
+                                </div>
+                                <p class="mb-2">${review.Description}</p>
+                                ${review.PhotoUrl ? `<img src="${review.PhotoUrl}" alt="User uploaded photo for review" class="w-full max-w-md rounded mt-2" />` : ''}
+                            </div>
+                        </div>
+                    `;
+
+                    reviewsContainer.appendChild(reviewDiv);
+                });
             } catch (error) {
                 console.error('Error fetching reviews:', error);
-                // Optionally, display a message to the user if reviews can't be loaded
-                reviewsContainer.innerHTML = '<p class="text-center text-red-400">Failed to load reviews. Please ensure the backend server is running.</p>';
-                return; // Stop execution if reviews can't be loaded
+                reviewsContainer.innerHTML = `<p class="text-center text-red-500">Failed to load reviews: ${error.message}</p>`;
             }
-            
-            // Sort reviews by date, newest first (optional)
-            reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            if (reviews.length === 0) {
-                reviewsContainer.innerHTML = '<p class="text-center text-gray-400">No reviews yet. Be the first to add one!</p>';
-                return;
-            }
-
-            reviews.forEach(review => {
-                const reviewDiv = document.createElement('div');
-                reviewDiv.className = 'review-item';
-                
-                reviewDiv.innerHTML = `
-                    <div class="flex items-start space-x-4">
-                        <div class="avatar">${review.name.charAt(0).toUpperCase()}</div>
-                        <div class="flex-1">
-                            <div class="flex items-center mb-2">
-                                <h3 class="text-lg font-bold">${review.name}</h3>
-                                <span class="ml-2 text-sm text-gray-500">${review.date}</span>
-                            </div>
-                            <div class="flex items-center mb-2">
-                                ${Array.from({length: 5}, (_, i) => 
-                                    `<span class="text-yellow-400 ${i < review.rating ? '' : 'text-gray-600'}">&#9733;</span>`
-                                ).join('')}
-                            </div>
-                            <p class="mb-2">${review.description}</p>
-                            ${review.photoUrl ? `<img src="${review.photoUrl}" alt="User uploaded photo for review" class="w-full max-w-md rounded mt-2" />` : ''}
-                        </div>
-                    </div>
-                `;
-                
-                reviewsContainer.appendChild(reviewDiv);
-            });
         }
 
         // Load and display reviews on page load
