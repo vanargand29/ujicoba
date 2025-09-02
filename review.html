@@ -1,411 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>J Store - Review & Rating</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom styles for star ratings */
-        .star-rating {
-            display: inline-flex;
-            flex-direction: row-reverse;
-        }
-        .star-rating input[type="radio"] {
-            display: none;
-        }
-        .star-rating label {
-            font-size: 2rem;
-            color: #4a5568; /* Darker gray for unselected stars */
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .star-rating input[type="radio"]:checked ~ label,
-        .star-rating label:hover,
-        .star-rating label:hover ~ label {
-            color: #fcd34d; /* Amber for selected/hovered stars */
-        }
-        .review-item {
-            border: 1px solid #2d3748; /* Darker border for review items */
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background-color: #2d3748; /* Darker background for review items */
-            color: #e2e8f0; /* Light text color */
-        }
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #4a5568; /* Darker background for avatar */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #cbd5e0; /* Lighter text color for avatar */
-        }
-        /* Custom styles for dark blue theme */
-        body {
-            background-color: #1a202c; /* Dark blue background */
-            color: #e2e8f0; /* Light text color */
-        }
-        .container-main { /* Changed from .container to avoid conflict with header .container */
-            background-color: #2d3748; /* Slightly lighter dark blue for main content container */
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-                0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        .text-gray-800 {
-            color: #e2e8f0; /* Light text for headings */
-        }
-        .text-gray-600 {
-            color: #a0aec0; /* Lighter gray for subtext */
-        }
-        .bg-blue-500 {
-            background-color: #4299e1; /* Blue for buttons */
-        }
-        .hover\:bg-blue-700:hover {
-            background-color: #3182ce; /* Darker blue on hover */
-        }
-        .bg-green-500 {
-            background-color: #48bb78; /* Green for submit button */
-        }
-        .hover\:bg-green-700:hover {
-            background-color: #38a169; /* Darker green on hover */
-        }
-        .bg-red-500 {
-            background-color: #ef4444; /* Red for cancel button */
-        }
-        .hover\:bg-red-700:hover {
-            background-color: #dc2626; /* Darker red on hover */
-        }
-        .modal-content {
-            background-color: #2d3748; /* Dark blue for modal background */
-            color: #e2e8f0; /* Light text for modal */
-        }
-        .modal-content input,
-        .modal-content textarea {
-            background-color: #4a5568; /* Darker input fields */
-            border-color: #4a5568;
-            color: #e2e8f0;
-        }
-        .modal-content input::placeholder,
-        .modal-content textarea::placeholder {
-            color: #a0aec0;
-        }
-        .text-gray-700 {
-            color: #e2e8f0; /* Light text for labels */
-        }
-        .text-gray-500 {
-            color: #a0aec0; /* Lighter gray for small text */
-        }
-
-        /* Header styles */
-        .header-nav {
-            background-color: #2a4365; /* Darker blue for header */
-            padding: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        .header-nav .container { /* Specific to header's container */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1280px; /* Ensure it aligns with main content */
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        .header-nav .logo {
-            font-size: 1.75rem;
-            font-weight: bold;
-            color: #90cdf4; /* Light blue for logo */
-        }
-        .header-nav .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-        .header-nav .nav-links a {
-            color: #e2e8f0;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-        .header-nav .nav-links a:hover {
-            color: #90cdf4; /* Light blue on hover */
-        }
-        .burger-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-        .burger-menu span {
-            height: 3px;
-            width: 25px;
-            background-color: #e2e8f0;
-            margin-bottom: 4px;
-            border-radius: 2px;
-        }
-
-        /* Responsive styles for header */
-        @media (max-width: 768px) {
-            .header-nav .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 64px; /* Adjust based on header height */
-                left: 0;
-                width: 100%;
-                background-color: #2a4365;
-                padding: 1rem;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                z-index: 10;
-            }
-            .header-nav .nav-links.active {
-                display: flex;
-            }
-            .header-nav .nav-links a {
-                padding: 0.75rem 0;
-                border-bottom: 1px solid #4a5568;
-                text-align: center;
-            }
-            .header-nav .nav-links a:last-child {
-                border-bottom: none;
-            }
-            .burger-menu {
-                display: flex;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>J Store - Review & Rating</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom styles for star ratings */
+    .star-rating {
+      display: inline-flex;
+      flex-direction: row-reverse;
+    }
+    .star-rating input[type="radio"] {
+      display: none;
+    }
+    .star-rating label {
+      font-size: 2rem;
+      color: #4a5568;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .star-rating input[type="radio"]:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      color: #fcd34d;
+    }
+    .review-item {
+      border: 1px solid #2d3748;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background-color: #2d3748;
+      color: #e2e8f0;
+    }
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #4a5568;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #cbd5e0;
+    }
+    body {
+      background-color: #1a202c;
+      color: #e2e8f0;
+    }
+    .container-main {
+      background-color: #2d3748;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    .header-nav {
+      background-color: #2a4365;
+      padding: 1rem 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .header-nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .header-nav .logo {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: #90cdf4;
+    }
+    .header-nav .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .header-nav .nav-links a {
+      color: #e2e8f0;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .header-nav .nav-links a:hover {
+      color: #90cdf4;
+    }
+    .burger-menu {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .burger-menu span {
+      height: 3px;
+      width: 25px;
+      background-color: #e2e8f0;
+      margin-bottom: 4px;
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      .header-nav .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background-color: #2a4365;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+      .header-nav .nav-links.active {
+        display: flex;
+      }
+      .header-nav .nav-links a {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #4a5568;
+        text-align: center;
+      }
+      .header-nav .nav-links a:last-child {
+        border-bottom: none;
+      }
+      .burger-menu {
+        display: flex;
+      }
+    }
+  </style>
 </head>
 <body class="font-sans">
-    <nav class="header-nav">
-        <div class="container">
-            <div class="logo">J Store</div>
-            <div class="nav-links" id="navLinks">
-                <a href="index.html">Home</a>
-                <a href="skyevent.html">Sky: Children of The Light</a>
-                <a href="roblox.html">Roblox</a>
-                <a href="review.html">Review</a>
-            </div>
-            <div class="burger-menu" id="burgerMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container-main mx-auto px-4 py-8 mt-8 max-w-4xl">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold">Review & Rating</h1>
-            <p class="mt-2">Share your opinions and see what others think!</p>
-        </header>
-        
-        <button id="addReviewBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-8">Add Review</button>
-        
-        <div id="reviewsContainer" class="space-y-4">
-            <!-- Reviews will be displayed here -->
-        </div>
+  <nav class="header-nav">
+    <div class="container">
+      <div class="logo">J Store</div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="skyevent.html">Sky: Children of The Light</a>
+        <a href="roblox.html">Roblox</a>
+        <a href="review.html">Review</a>
+      </div>
+      <div class="burger-menu" id="burgerMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
+  </nav>
 
-    <!-- Modal for Add Review -->
-    <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md modal-content">
-            <h2 class="text-2xl font-bold mb-4">Add Your Review</h2>
-            <form id="reviewForm">
-                <div class="mb-4">
-                    <label class="block font-bold mb-2" for="email">Email</label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your email" required />
-                </div>
-                <div class="mb-4">
-                    <label class="block font-bold mb-2" for="name">Name</label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" required />
-                </div>
-                <div class="mb-4">
-                    <label class="block font-bold mb-2" for="rating">Rating</label>
-                    <div class="star-rating">
-                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5">&#9733;</label>
-                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4">&#9733;</label>
-                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3">&#9733;</label>
-                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2">&#9733;</label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1">&#9733;</label>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label class="block font-bold mb-2" for="description">Description</label>
-                    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline resize-none" id="description" rows="4" placeholder="Describe your review" required></textarea>
-                </div>
-                <div class="mb-4">
-                    <label class="block font-bold mb-2" for="photo">Photo (Optional)</label>
-                    <input type="file" id="photo" accept="image/*" class="block w-full" />
-                    <p class="text-sm mt-1">Upload a photo if you'd like.</p>
-                </div>
-                <div class="flex items-center justify-between">
-                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
-                    <button type="button" id="closeModalBtn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Cancel</button>
-                </div>
-            </form>
+  <div class="container-main mx-auto px-4 py-8 mt-8 max-w-4xl">
+    <header class="text-center mb-8">
+      <h1 class="text-4xl font-bold">Review & Rating</h1>
+      <p class="mt-2">Share your opinions and see what others think!</p>
+    </header>
+    <button id="addReviewBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-8">
+      Add Review
+    </button>
+    <div id="reviewsContainer" class="space-y-4"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md modal-content">
+      <h2 class="text-2xl font-bold mb-4">Add Your Review</h2>
+      <form id="reviewForm">
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="email">Email</label>
+          <input id="email" type="email" required class="shadow border rounded w-full py-2 px-3" />
         </div>
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="name">Name</label>
+          <input id="name" type="text" required class="shadow border rounded w-full py-2 px-3" />
+        </div>
+        <div class="mb-4">
+          <label class="block font-bold mb-2">Rating</label>
+          <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5">&#9733;</label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4">&#9733;</label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3">&#9733;</label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2">&#9733;</label>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1">&#9733;</label>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="description">Description</label>
+          <textarea id="description" rows="4" required class="shadow border rounded w-full py-2 px-3"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block font-bold mb-2" for="photo">Photo (Optional)</label>
+          <input type="file" id="photo" accept="image/*" class="block w-full" />
+        </div>
+        <div class="flex justify-between">
+          <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Submit
+          </button>
+          <button type="button" id="closeModalBtn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <script>
-        // DOM Elements
-        const addReviewBtn = document.getElementById('addReviewBtn');
-        const modal = document.getElementById('modal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const reviewForm = document.getElementById('reviewForm');
-        const reviewsContainer = document.getElementById('reviewsContainer');
-        const burgerMenu = document.getElementById('burgerMenu');
-        const navLinks = document.getElementById('navLinks');
+  <script>
+    // GANTI DENGAN URL WEB APP ANDA YANG SEBENARNYA
+    const GOOGLE_APPS_SCRIPT_WEB_APP_URL =
+      "https://script.google.com/macros/s/AKfycbyJfrMkUaNFrLsFzZVNiirNz-H6tqRWhUm9OCVHr8caVQ9p0Cs0kpaVH2kN9la2UpdU/exec"; // Contoh URL, GANTI INI!
 
-        // --- KONFIGURASI GOOGLE APPS SCRIPT WEB APP URL ---
-        // GANTI DENGAN URL WEB APP YANG ANDA DAPATKAN DARI GOOGLE APPS SCRIPT
-        const GOOGLE_APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzQSU8ax0EfW6IcIf8C-eSDUkE1R5WwtJC__lSH_bWtHS576FKiTDjIvVKQvKolhXA/exec'; 
+    const addReviewBtn = document.getElementById("addReviewBtn");
+    const modal = document.getElementById("modal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const reviewForm = document.getElementById("reviewForm");
+    const reviewsContainer = document.getElementById("reviewsContainer");
+    const burgerMenu = document.getElementById("burgerMenu");
+    const navLinks = document.getElementById("navLinks");
 
-        // Burger menu toggle
-        burgerMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+    burgerMenu.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    addReviewBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      reviewForm.reset();
+    });
+
+    reviewForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const rating =
+        document.querySelector('input[name="rating"]:checked')?.value || "0";
+      const description = document
+        .getElementById("description")
+        .value.trim();
+      const photoFile = document.getElementById("photo").files[0];
+      let photoUrl = "";
+
+      if (photoFile) {
+        const reader = new FileReader();
+        reader.onload = async function (event) {
+          photoUrl = event.target.result;
+          await sendReviewToGoogleSheets(email, name, rating, description, photoUrl);
+        };
+        reader.readAsDataURL(photoFile);
+      } else {
+        await sendReviewToGoogleSheets(email, name, rating, description, photoUrl);
+      }
+
+      modal.classList.add("hidden");
+      reviewForm.reset();
+    });
+
+    async function sendReviewToGoogleSheets(email, name, rating, description, photoUrl) {
+      const reviewData = {
+        email,
+        name,
+        rating: parseInt(rating),
+        description,
+        photoUrl,
+      };
+
+      try {
+        const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(reviewData),
         });
 
-        // Close nav links if clicked outside (optional, but good UX)
-        document.addEventListener('click', (event) => {
-            if (
-                !navLinks.contains(event.target) &&
-                !burgerMenu.contains(event.target) &&
-                navLinks.classList.contains('active')
-            ) {
-                navLinks.classList.remove('active');
-            }
-        });
+        if (!response.ok) throw new Error("Server error");
+        const result = await response.json();
+        console.log("Review added:", result);
+        displayReviews(); // Refresh reviews after adding
+      } catch (err) {
+        console.error(err);
+        alert("Failed to add review: " + err.message);
+      }
+    }
 
-        // Open modal
-        addReviewBtn.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-        });
+    async function displayReviews() {
+      reviewsContainer.innerHTML = "";
+      try {
+        const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, { method: "GET" });
+        if (!response.ok) throw new Error("Server error");
+        let reviews = await response.json();
+        if (!Array.isArray(reviews)) reviews = [];
 
-        // Close modal
-        closeModalBtn.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            reviewForm.reset();
-        });
-
-        // Handle form submission
-        reviewForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById('email').value.trim();
-            const name = document.getElementById('name').value.trim();
-            const rating = document.querySelector('input[name="rating"]:checked')?.value || '0';
-            const description = document.getElementById('description').value.trim();
-            const photoFile = document.getElementById('photo').files[0];
-
-            let photoUrl = null;
-
-            if (photoFile) {
-                // Convert photo to Data URL (large size, not ideal but as placeholder)
-                const reader = new FileReader();
-                reader.onload = async function(event) {
-                    photoUrl = event.target.result;
-                    await sendReviewToGoogleSheets(email, name, rating, description, photoUrl);
-                };
-                reader.readAsDataURL(photoFile);
-            } else {
-                await sendReviewToGoogleSheets(email, name, rating, description, photoUrl);
-            }
-
-            modal.classList.add('hidden');
-            reviewForm.reset();
-        });
-
-        // Function to send review to Google Sheets via Apps Script Web App
-        async function sendReviewToGoogleSheets(email, name, rating, description, photoUrl) {
-            const reviewData = {
-                email,
-                name,
-                rating: parseInt(rating),
-                description,
-                photoUrl: photoUrl || ''
-            };
-
-            try {
-                const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(reviewData)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Failed to add review: ${response.statusText}`);
-                }
-
-                const result = await response.json();
-                console.log('Review added:', result);
-                displayReviews(); // Reload reviews after adding
-            } catch (error) {
-                console.error('Error sending review to Google Sheets:', error);
-                alert('Failed to add review: ' + error.message);
-            }
+        if (reviews.length === 0) {
+          reviewsContainer.innerHTML =
+            '<p class="text-center text-gray-400">No reviews yet.</p>';
+          return;
         }
 
-        // Function to display reviews from Google Sheets
-        async function displayReviews() {
-            reviewsContainer.innerHTML = '';
+        // Sort reviews by Timestamp in descending order (newest first)
+        reviews.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
 
-            try {
-                const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, {
-                    method: 'GET'
-                });
+        reviews.forEach((review) => {
+          const reviewDiv = document.createElement("div");
+          reviewDiv.className = "review-item";
+          reviewDiv.innerHTML = `
+            <div class="flex items-start space-x-4">
+              <div class="avatar">${review.Name?.charAt(0) || "?"}</div>
+              <div class="flex-1">
+                <div class="flex items-center mb-2">
+                  <h3 class="text-lg font-bold">${review.Name}</h3>
+                  <span class="ml-2 text-sm text-gray-500">${new Date(review.Timestamp).toLocaleString()}</span>
+                </div>
+                <div class="flex items-center mb-2">
+                  ${Array.from({ length: 5 }, (_, i) =>
+                    `<span class="text-yellow-400 ${
+                      i < review.Rating ? "" : "text-gray-600"
+                    }">&#9733;</span>`
+                  ).join("")}
+                </div>
+                <p class="mb-2">${review.Description}</p>
+                ${review.PhotoUrl ? `<img src="${review.PhotoUrl}" class="w-full max-w-md rounded mt-2" />` : ""}
+              </div>
+            </div>`;
+          reviewsContainer.appendChild(reviewDiv);
+        });
+      } catch (err) {
+        console.error(err);
+        reviewsContainer.innerHTML =
+          `<p class="text-center text-red-500">Failed to load reviews</p>`;
+      }
+    }
 
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch reviews from Google Sheets: ${response.statusText}`);
-                }
-
-                let reviews = await response.json();
-
-                if (!Array.isArray(reviews)) {
-                    reviews = [];
-                }
-
-                if (reviews.length === 0) {
-                    reviewsContainer.innerHTML = '<p class="text-center text-gray-400">No reviews yet. Be the first to add one!</p>';
-                    return;
-                }
-
-                reviews.forEach(review => {
-                    const reviewDiv = document.createElement('div');
-                    reviewDiv.className = 'review-item';
-
-                    reviewDiv.innerHTML = `
-                        <div class="flex items-start space-x-4">
-                            <div class="avatar">${review.Name.charAt(0).toUpperCase()}</div>
-                            <div class="flex-1">
-                                <div class="flex items-center mb-2">
-                                    <h3 class="text-lg font-bold">${review.Name}</h3>
-                                    <span class="ml-2 text-sm text-gray-500">${review.Timestamp}</span>
-                                </div>
-                                <div class="flex items-center mb-2">
-                                    ${Array.from({length: 5}, (_, i) => 
-                                        `<span class="text-yellow-400 ${i < review.Rating ? '' : 'text-gray-600'}">&#9733;</span>`
-                                    ).join('')}
-                                </div>
-                                <p class="mb-2">${review.Description}</p>
-                                ${review.PhotoUrl ? `<img src="${review.PhotoUrl}" alt="User uploaded photo for review" class="w-full max-w-md rounded mt-2" />` : ''}
-                            </div>
-                        </div>
-                    `;
-
-                    reviewsContainer.appendChild(reviewDiv);
-                });
-            } catch (error) {
-                console.error('Error fetching reviews:', error);
-                reviewsContainer.innerHTML = `<p class="text-center text-red-500">Failed to load reviews: ${error.message}</p>`;
-            }
-        }
-
-        // Load and display reviews on page load
-        window.addEventListener('load', displayReviews);
-    </script>
+    window.addEventListener("load", displayReviews);
+  </script>
 </body>
 </html>
