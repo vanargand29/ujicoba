@@ -201,7 +201,6 @@
   </div>
 
   <script>
-    // URL Web App Google Apps Script Anda
     const GOOGLE_APPS_SCRIPT_WEB_APP_URL =
       "https://script.google.com/macros/s/AKfycbxTU1viQtgqCgdBaIjTKzMuSC29d-ZRyYSk5TkzWBbcAzSWJsIZ47kuWqjkkbRBIqLM/exec";
 
@@ -275,7 +274,6 @@
         const result = await response.json();
         console.log("Review added:", result);
 
-        // Perbaiki pengecekan properti success (bukan 'succes')
         if (result.success) {
           displayReviews();
         } else {
@@ -303,7 +301,6 @@
           return;
         }
 
-        // Sort reviews by Timestamp in descending order (newest first)
         reviews.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
 
         reviews.forEach((review) => {
