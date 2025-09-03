@@ -203,7 +203,7 @@
   <script>
     // GANTI DENGAN URL WEB APP ANDA YANG SEBENARNYA
     const GOOGLE_APPS_SCRIPT_WEB_APP_URL =
-      "https://script.google.com/macros/s/AKfycbyJfrMkUaNFrLsFzZVNiirNz-H6tqRWhUm9OCVHr8caVQ9p0Cs0kpaVH2kN9la2UpdU/exec"; // Contoh URL, GANTI INI!
+      "https://script.google.com/macros/s/AKfycbxTU1viQtgqCgdBaIjTKzMuSC29d-ZRyYSk5TkzWBbcAzSWJsIZ47kuWqjkkbRBIqLM/exec"; // Contoh URL, GANTI INI!
 
     const addReviewBtn = document.getElementById("addReviewBtn");
     const modal = document.getElementById("modal");
@@ -229,14 +229,14 @@
     reviewForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("email").value.trim();
-      const name = document.getElementById("name").value.trim();
+      const name = document.getElementById("name").value.trim(); // Ini akan menjadi 'nama' di Apps Script
       const rating =
         document.querySelector('input[name="rating"]:checked')?.value || "0";
       const description = document
         .getElementById("description")
         .value.trim();
       const photoFile = document.getElementById("photo").files[0];
-      let photoUrl = "";
+      let photoUrl = ""; // Ini akan menjadi 'foto' di Apps Script
 
       if (photoFile) {
         const reader = new FileReader();
@@ -253,13 +253,14 @@
       reviewForm.reset();
     });
 
-    async function sendReviewToGoogleSheets(email, name, rating, description, photoUrl) {
+    async function sendReviewToGoogleSheets(email, nama, rating, description, foto) {
       const reviewData = {
+        action: "insert", // Tambahkan parameter action
         email,
-        name,
+        nama, // Sesuaikan dengan nama kolom di Apps Script
         rating: parseInt(rating),
         description,
-        photoUrl,
+        foto, // Sesuaikan dengan nama kolom di Apps Script
       };
 
       try {
@@ -272,7 +273,11 @@
         if (!response.ok) throw new Error("Server error");
         const result = await response.json();
         console.log("Review added:", result);
-        displayReviews(); // Refresh reviews after adding
+        if (result.succes) { // Periksa properti 'succes' dari respons Apps Script
+            displayReviews(); // Refresh reviews after adding
+        } else {
+            alert("Failed to add review: " + result.massage);
+        }
       } catch (err) {
         console.error(err);
         alert("Failed to add review: " + err.message);
@@ -284,7 +289,9 @@
       try {
         const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, { method: "GET" });
         if (!response.ok) throw new Error("Server error");
-        let reviews = await response.json();
+        const result = await response.json(); // Ambil seluruh objek respons
+        let reviews = result.data; // Akses properti 'data'
+
         if (!Array.isArray(reviews)) reviews = [];
 
         if (reviews.length === 0) {
@@ -301,21 +308,21 @@
           reviewDiv.className = "review-item";
           reviewDiv.innerHTML = `
             <div class="flex items-start space-x-4">
-              <div class="avatar">${review.Name?.charAt(0) || "?"}</div>
+              <div class="avatar">${review.nama?.charAt(0) || "?"}</div>
               <div class="flex-1">
                 <div class="flex items-center mb-2">
-                  <h3 class="text-lg font-bold">${review.Name}</h3>
+                  <h3 class="text-lg font-bold">${review.nama}</h3>
                   <span class="ml-2 text-sm text-gray-500">${new Date(review.Timestamp).toLocaleString()}</span>
                 </div>
                 <div class="flex items-center mb-2">
                   ${Array.from({ length: 5 }, (_, i) =>
                     `<span class="text-yellow-400 ${
-                      i < review.Rating ? "" : "text-gray-600"
+                      i < review.rating ? "" : "text-gray-600" // Gunakan review.rating
                     }">&#9733;</span>`
                   ).join("")}
                 </div>
-                <p class="mb-2">${review.Description}</p>
-                ${review.PhotoUrl ? `<img src="${review.PhotoUrl}" class="w-full max-w-md rounded mt-2" />` : ""}
+                <p class="mb-2">${review.description}</p>
+                ${review.foto ? `<img src="${review.foto}" class="w-full max-w-md rounded mt-2" />` : ""}
               </div>
             </div>`;
           reviewsContainer.appendChild(reviewDiv);
