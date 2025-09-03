@@ -201,9 +201,9 @@
   </div>
 
   <script>
-    // GANTI DENGAN URL WEB APP ANDA YANG SEBENARNYA
+    // URL Web App Google Apps Script Anda
     const GOOGLE_APPS_SCRIPT_WEB_APP_URL =
-      "https://script.google.com/macros/s/AKfycbxTU1viQtgqCgdBaIjTKzMuSC29d-ZRyYSk5TkzWBbcAzSWJsIZ47kuWqjkkbRBIqLM/exec"; // Contoh URL, GANTI INI!
+      "https://script.google.com/macros/s/AKfycbxTU1viQtgqCgdBaIjTKzMuSC29d-ZRyYSk5TkzWBbcAzSWJsIZ47kuWqjkkbRBIqLM/exec";
 
     const addReviewBtn = document.getElementById("addReviewBtn");
     const modal = document.getElementById("modal");
@@ -229,57 +229,60 @@
     reviewForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("email").value.trim();
-      const name = document.getElementById("name").value.trim(); // Ini akan menjadi 'nama' di Apps Script
-      const rating =
-        document.querySelector('input[name="rating"]:checked')?.value || "0";
-      const description = document
-        .getElementById("description")
-        .value.trim();
+      const name = document.getElementById("name").value.trim();
+      const rating = document.querySelector('input[name="rating"]:checked')?.value || "0";
+      const description = document.getElementById("description").value.trim();
       const photoFile = document.getElementById("photo").files[0];
-      let photoUrl = ""; // Ini akan menjadi 'foto' di Apps Script
+      let photoUrl = "";
 
       if (photoFile) {
         const reader = new FileReader();
         reader.onload = async function (event) {
           photoUrl = event.target.result;
           await sendReviewToGoogleSheets(email, name, rating, description, photoUrl);
+          modal.classList.add("hidden");
+          reviewForm.reset();
         };
         reader.readAsDataURL(photoFile);
       } else {
         await sendReviewToGoogleSheets(email, name, rating, description, photoUrl);
+        modal.classList.add("hidden");
+        reviewForm.reset();
       }
-
-      modal.classList.add("hidden");
-      reviewForm.reset();
     });
 
     async function sendReviewToGoogleSheets(email, nama, rating, description, foto) {
       const reviewData = {
-        action: "insert", // Tambahkan parameter action
+        action: "insert",
         email,
-        nama, // Sesuaikan dengan nama kolom di Apps Script
+        nama,
         rating: parseInt(rating),
         description,
-        foto, // Sesuaikan dengan nama kolom di Apps Script
+        foto,
       };
 
       try {
         const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(reviewData),
         });
 
-        if (!response.ok) throw new Error("Server error");
+        if (!response.ok) throw new Error("Server error: " + response.status);
+
         const result = await response.json();
         console.log("Review added:", result);
-        if (result.succes) { // Periksa properti 'succes' dari respons Apps Script
-            displayReviews(); // Refresh reviews after adding
+
+        // Perbaiki pengecekan properti success (bukan 'succes')
+        if (result.success) {
+          displayReviews();
         } else {
-            alert("Failed to add review: " + result.massage);
+          alert("Failed to add review: " + (result.message || "Unknown error"));
         }
       } catch (err) {
-        console.error(err);
+        console.error("Error sending review:", err);
         alert("Failed to add review: " + err.message);
       }
     }
@@ -289,8 +292,8 @@
       try {
         const response = await fetch(GOOGLE_APPS_SCRIPT_WEB_APP_URL, { method: "GET" });
         if (!response.ok) throw new Error("Server error");
-        const result = await response.json(); // Ambil seluruh objek respons
-        let reviews = result.data; // Akses properti 'data'
+        const result = await response.json();
+        let reviews = result.data;
 
         if (!Array.isArray(reviews)) reviews = [];
 
@@ -317,7 +320,7 @@
                 <div class="flex items-center mb-2">
                   ${Array.from({ length: 5 }, (_, i) =>
                     `<span class="text-yellow-400 ${
-                      i < review.rating ? "" : "text-gray-600" // Gunakan review.rating
+                      i < review.rating ? "" : "text-gray-600"
                     }">&#9733;</span>`
                   ).join("")}
                 </div>
